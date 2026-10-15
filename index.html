@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FansGrow.id</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="fade-in">
+    <div class="logo">
+      <img src="logo.jpg" alt="FansGrow.id Logo">
+      <h2>FansGrow.id</h2>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="#">Beranda</a></li>
+        <li><a href="tentang.html">Tentang Kami</a></li>
+        <li><a href="galeri_testi.html">Galeri Testi</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </nav>
+
+    <button class="btn-hubungi slide-up" id="btnHubungi">Hubungi Kami →</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+
+<script>
+  // Saat tombol diklik, arahkan ke kontak.html
+  document.getElementById("btnHubungi").addEventListener("click", function() {
+    window.location.href = "kontak.php";
+  });
+
+  // Toggle mobile nav
+  const navToggle = document.getElementById('navToggle');
+  const headerEl = document.querySelector('header');
+  const navLinks = document.querySelectorAll('nav ul li a');
+
+  navToggle.addEventListener('click', function() {
+    headerEl.classList.toggle('nav-open');
+  });
+
+  // Close nav when a link is clicked (mobile)
+  navLinks.forEach(link => link.addEventListener('click', () => {
+    if (headerEl.classList.contains('nav-open')) headerEl.classList.remove('nav-open');
+  }));
+</script>
+
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero fade-in">
+    <img src="img1.webp" alt="Tampilan Instagram" class="slide-left">
+
+    <div class="hero-text slide-right">
+      <h1>Fans<br><span>Grow.id</span></h1>
+<br>
+      <a href="pesan.html" class="btn-pesan">Pesan Sekarang →</a>
+
+      <div class="profil-container" id="profilList">
+  <img src="profil1.jpg" alt="Profil 1" class="profil">
+  <img src="profil2.jpg" alt="Profil 2" class="profil">
+  <img src="profil3.jpg" alt="Profil 3" class="profil">
+  <img src="profil4.jpg" alt="Profil 4" class="profil">
+        
+        <div class="profil-count">100+</div>
+      </div>
+<script>
+  // Arahkan ke halaman galeri_testi.html saat diklik
+  document.getElementById("profilList").addEventListener("click", function() {
+    window.location.href = "galeri_testi.html";
+  });
+</script>
+      <p class="hero-desc">
+        Temukan layanan kami yang dirancang dengan penuh dedikasi untuk membantu Anda tumbuh lebih besar di dunia digital.<br>
+        Rasakan bagaimana FansGrow mengubah akun Anda menjadi pusat perhatian dengan interaksi nyata dan pengikut aktif yang autentik.
+      </p>
+
+      <button class="btn-portofolio" onclick="window.location.href='portofolio.php'">Portofolio Kami →</button>
+
+      
+    </div>
+  </section>
+
+  <!-- Animasi Scroll -->
+  <script>
+    const elements = document.querySelectorAll('.fade-in, .slide-up, .slide-left, .slide-right, .bounce');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    });
+
+    elements.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pesan Layanan | FansGrow.id</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: #0f0b0b;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 50px;
+    }
+
+    /* kotak kiri (pencarian + list paket) */
+    .service-container {
+      background: rgba(255,255,255,0.08);
+      padding: 20px;
+      border-radius: 15px;
+      width: 350px;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .search-box input {
+      border: none;
+      padding: 12px;
+      width: 100%;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .package {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(90deg, #ff8800, #ff6600);
+      padding: 12px 18px;
+      border-radius: 25px;
+      margin: 10px 0;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .package:hover {
+      transform: scale(1.05);
+      background: linear-gradient(90deg, #ffaa33, #ff7711);
+    }
+
+    /* kotak kanan (form pemesan) */
+    .form-container {
+      background: rgba(255,255,255,0.08);
+      padding: 25px;
+      border-radius: 15px;
+      width: 350px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin-top: 5px;
+      outline: none;
+    }
+
+    .total {
+      margin-top: 20px;
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .checkout-btn {
+      background-color: #ff8800;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .checkout-btn:hover {
+      background-color: #ffaa33;
+    }
+    
+    /* Responsive: stack service list and form on smaller screens */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 18px;
+      }
+
+      .service-container, .form-container {
+        width: 100%;
+        max-width: 420px;
+      }
+
+      .form-container {
+        margin-top: 0;
+      }
+
+      .search-box { margin-bottom: 12px; }
+      .package { font-size: 14px; }
+      .checkout-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<a href="index.html" style="
+  text-decoration: none;
+  color: white;
+  background-color: #ff6600;
+  padding: 8px 15px;
+  border-radius: 25px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 15px;
+">
+⬅ Kembali
+</a>
+
+  <!-- Bagian kiri: daftar layanan -->
+  <div class="service-container">
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Cari layanan...">
+    </div>
+    <div id="service-list"></div>
+  </div>
+
+  <!-- Bagian kanan: form customer -->
+  <div class="form-container">
+    <h3>👤 Customer Detail:</h3>
+    <form id="orderForm" action="simpan_pesanan.php" method="POST">
+  <label>Nama :</label>
+  <input type="text" name="nama" required>
+
+  <label>Username Akun :</label>
+  <input type="text" name="username_akun" required>
+
+  <label>Email :</label>
+  <input type="email" name="email" required>
+
+  <div class="total">
+    TOTAL : <span id="total-display">Rp 0</span>
+  </div>
+  <input type="hidden" name="total" id="total">
+
+  <button type="submit" class="checkout-btn">Checkout</button>
+</form>
+
+  </div>
+
+  <script>
+    const services = {
+      "youtube": [
+        { name: "500 subs", price: 25000 },
+        { name: "1000 subs", price: 50000 },
+        { name: "5000 subs", price: 100000 },
+        { name: "10000 subs", price: 200000 }
+      ],
+      "instagram": [
+        { name: "100 followers", price: 20000 },
+        { name: "500 followers", price: 60000 },
+        { name: "1000 followers", price: 100000 }
+      ],
+      "tiktok": [
+        { name: "100 likes", price: 10000 },
+        { name: "1000 likes", price: 50000 },
+        { name: "5000 likes", price: 120000 }
+      ],
+      "twitter": [
+        { name: "100 followers", price: 15000 },
+        { name: "1000 followers", price: 70000 }
+      ]
+
+    };
+
+    const searchInput = document.getElementById("search");
+    const serviceList = document.getElementById("service-list");
+    const totalDisplay = document.getElementById("total-display");
+    const totalInput = document.getElementById("total");
+
+    // Tampilkan hasil pencarian
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase();
+      serviceList.innerHTML = "";
+
+      if (services[query]) {
+        services[query].forEach(item => {
+          const div = document.createElement("div");
+          div.classList.add("package");
+          div.textContent = `${item.name} — Rp ${item.price.toLocaleString("id-ID")}`;
+          div.onclick = () => selectPackage(item.price);
+          serviceList.appendChild(div);
+        });
+      }
+    });
+
+    function selectPackage(price) {
+      totalDisplay.textContent = `Rp ${price.toLocaleString("id-ID")}`;
+      totalInput.value = price;
+    }
+  </script>
+
+</body>
+</html>

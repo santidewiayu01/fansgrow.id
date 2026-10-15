@@ -1,0 +1,430 @@
+/* ====== STYLE.CSS ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* make all images responsive by default */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+
+
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 60px;
+  background-color: #0f0b0b;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav ul li a:hover {
+  color: #f88b48;
+}
+
+.btn-hubungi {
+  border: 1px solid white;
+  background: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-hubungi:hover {
+  background: #f88b48;
+  border-color: #f88b48;
+  color: #0f0b0b;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  padding: 60px 80px;
+  flex-wrap: wrap;
+}
+
+.hero img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-text h1 {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hero-text h1 span {
+  display: block;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.btn-pesan {
+  background-color: #f88b48;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-pesan:hover {
+  background-color: #ff995a;
+}
+
+.profil-container {
+  display: flex;
+  align-items: center;
+  margin-top: 25px;
+  gap: 10px;
+}
+
+.profil-container img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.profil-count {
+  background-color: #f88b48;
+  color: #0f0b0b;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.hero-desc {
+  max-width: 500px;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #ddd;
+}
+
+.btn-portofolio {
+  border: 1px solid white;
+  padding: 10px 25px;
+  border-radius: 30px;
+  background: none;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+  margin-top: 20px;
+}
+
+.btn-portofolio:hover {
+  background-color: #f88b48;
+  color: #0f0b0b;
+  border-color: #f88b48;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body { background-attachment: scroll; }
+  header {
+    flex-direction: column;
+    gap: 12px;
+    padding: 15px 20px;
+  }
+  nav ul { flex-wrap: wrap; }
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px 20px;
+    gap: 20px;
+  }
+  .hero-text h1 {
+    font-size: 40px;
+  }
+  .hero-desc { max-width: 100%; }
+  .profil-container { justify-content: center; }
+  .search-box { width: 100%; }
+  .pesan-section { padding: 30px 20px; }
+  .pesan-container { flex-direction: column; gap: 20px; }
+  .produk-preview, .form-pesan { width: 100%; }
+}
+
+@media (max-width: 480px) {
+  header { padding: 12px 14px; }
+  /* show a hamburger toggle instead of the full nav on very small screens */
+  nav ul { display: none; }
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  /* Reposition header items: hamburger left, logo center, hubungi right */
+  header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    padding: 12px 14px;
+  }
+
+  /* order elements explicitly for small screens */
+  .nav-toggle { order: 1; }
+  .logo { order: 2; margin: 0 auto; display: flex; align-items: center; gap: 8px; }
+  nav { order: 4; }
+  .btn-hubungi { order: 3; }
+
+  /* center the logo's contents */
+  .logo img { width: 36px; height: 36px; }
+  .logo h2 { font-size: 16px; }
+  /* when header gets the .nav-open class, show the dropdown nav */
+  header.nav-open nav ul {
+    display: block;
+    position: absolute;
+    top: 100%;
+    right: 14px;
+    background: rgba(15,11,11,0.98);
+    padding: 12px 14px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    z-index: 150;
+    min-width: 160px;
+  }
+  header.nav-open nav ul li { display: block; margin: 8px 0; }
+  header.nav-open nav ul li a { display: block; }
+  .logo h2 { font-size: 18px; }
+  .btn-hubungi { padding: 8px 12px; }
+  .hero-text h1 { font-size: 28px; }
+  .hero { padding: 20px 12px; gap: 12px; }
+  .hero-desc { font-size: 14px; }
+  .profil-count { width: 44px; height: 44px; }
+  .btn-pesan, .btn-portofolio, .btn-checkout { padding: 10px 16px; }
+  .contact-form, .form-pesan { padding: 18px; }
+}
+
+  @media (min-width: 481px) {
+    .nav-toggle { display: none; }
+  }
+
+/* ====== Animations ====== */
+.fade-in, .slide-up, .slide-left, .slide-right, .bounce {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
+}
+
+.fade-in.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-up.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-left {
+  transform: translateX(-50px);
+}
+.slide-left.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-right {
+  transform: translateX(50px);
+}
+.slide-right.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.bounce.show {
+  animation: bounceIn 1s ease forwards;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* ====== HALAMAN PESAN ====== */
+.pesan-section {
+  padding: 60px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: rgba(15, 11, 11, 0.95);
+  min-height: 100vh;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.back-btn {
+  background-color: #f88b48;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.search-box {
+  margin: 30px 0;
+  display: flex;
+  gap: 10px;
+  width: 400px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.search-box button {
+  background-color: #f88b48;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.pesan-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 40px;
+}
+
+.produk-preview {
+  width: 400px;
+  height: 400px;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 15px;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.form-pesan {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  width: 400px;
+  backdrop-filter: blur(10px);
+}
+
+.form-pesan h3 {
+  margin-bottom: 20px;
+  text-transform: lowercase;
+  font-weight: 600;
+}
+
+.form-pesan label {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.form-pesan input {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 5px;
+  outline: none;
+}
+
+.total {
+  margin-top: 20px;
+  font-weight: 600;
+}
+
+.btn-checkout {
+  background-color: #f88b48;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  margin-top: 10px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-checkout:hover {
+  background-color: #ff995a;
+}
